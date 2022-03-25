@@ -5,6 +5,8 @@
 ## Description
 This is a simple project to implement a endpoint to convert a number into english words.
 
+Included a Postman collection to can test
+
 
 ## IMPORTANT: How to run the project
 
