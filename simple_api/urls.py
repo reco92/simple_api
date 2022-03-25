@@ -1,4 +1,4 @@
-"""simple_api2 URL Configuration
+"""simple_api URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+api_v1_patterns = [
+    path('words/', include(
+        ('words.urls', 'words'), namespace='words')),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include((api_v1_patterns, 'api'), namespace='api')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
